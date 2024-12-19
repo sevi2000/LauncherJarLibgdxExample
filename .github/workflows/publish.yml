@@ -38,7 +38,7 @@ jobs:
         if (!(Test-Path "version.md")) {
           $version = Get-Content gradle.properties | Select-String -Pattern 'projectVersion='
           $version = $version -replace 'projectVersion=', ''
-          $version | Out-File -FilePath version.md
+          $version | Set-Content -NoNewline -Path version.md
         }
 
     - name: Read version.md
