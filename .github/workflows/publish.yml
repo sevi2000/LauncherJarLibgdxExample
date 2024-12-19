@@ -62,7 +62,9 @@ jobs:
         chmod 777 gradlew
         ./gradlew jar -Pversion='${{ steps.version.outputs.content }}'
         # For liftoff project (The new default libgdx project setup tool)
-        mv lwjgl3/build/libs/*.jar ${{ env.ARTIFACT_NAME }}.jar
+        $full_path = ./gradlew printJarPath | Select-String "Logged.*" | ForEach-Object { ($_ -split ":")[1].Trim() }
+        echo "JAR PATH : $full_path"
+        mv $full_path FragmentOfTheAbyss.jar
         # For the previous libgdx project setup tool
         # mv desktop/build/libs/*.jar ${{ env.ARTIFACT_NAME }}.jar
         ls
