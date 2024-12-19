@@ -64,7 +64,7 @@ jobs:
         # For liftoff project (The new default libgdx project setup tool)
         $full_path = ./gradlew printJarPath | Select-String "Logged.*" | ForEach-Object { ($_ -split ":")[1].Trim() }
         echo "JAR PATH : $full_path"
-        mv $full_path FragmentOfTheAbyss.jar
+        mv $full_path ${{ env.ARTIFACT_NAME }}.jar
         # For the previous libgdx project setup tool
         # mv desktop/build/libs/*.jar ${{ env.ARTIFACT_NAME }}.jar
         ls
