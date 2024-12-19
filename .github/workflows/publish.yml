@@ -31,6 +31,16 @@ jobs:
         distribution: ${{ env.JAVA_DISTRIBUTION }}
         java-version: ${{ env.JAVA_VERSION }}
 
+    # If version.md does not exist read the version from gradle.properties
+    - name: Update version.md from gradle.properties 
+      shell: pwsh
+      run: |
+        if (!(Test-Path "version.md")) {
+          $version = Get-Content gradle.properties | Select-String -Pattern 'projectVersion='
+          $version = $version -replace 'projectVersion=', ''
+          $version | Out-File -FilePath version.md
+        }
+
     - name: Read version.md
       id: version
       uses: juliangruber/read-file-action@v1
