@@ -72,7 +72,7 @@ jobs:
       id: create_release
       with:
         draft: false
-        prerelease: true
+        prerelease: false
         release_name: ${{ steps.version.outputs.content }}
         tag_name: ${{ steps.version.outputs.content }}
         body_path: CHANGELOG.md
@@ -114,7 +114,7 @@ jobs:
             os: macos-latest
           - launcher-extension: pkg
             os: macos-latest
-    if: github.event.pull_request.merged == true
+    if: github.event.pull_request.merged == true || github.event_name == 'push'
     needs: releaseJob
     runs-on: ${{ matrix.os }}
     steps:
