@@ -13,8 +13,8 @@ env:
   JRE_VERSION: '21.0.1'
   GITHUB_TOKEN: ${{ github.token }}
   ARTIFACT_NAME: 'LauncherJarLibgdxExample'
-  USER_NAME: 'HydrolienF'
-  USER_EMAIL: 'hydrolien.f@gmail.com'
+  USER_NAME: ${{ github.actor }}
+  USER_EMAIL: you@example.com
   UUID: 'e1caab6b-1230-4691-a880-dd2d0b8ebb98'
 
 jobs:
@@ -32,7 +32,7 @@ jobs:
         java-version: ${{ env.JAVA_VERSION }}
 
     # If version.md does not exist read the version from gradle.properties
-    - name: Update version.md from gradle.properties 
+    - name: Update version.md from gradle.properties
       shell: pwsh
       run: |
         if (!(Test-Path "version.md")) {
